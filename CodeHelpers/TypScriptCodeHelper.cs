@@ -25,9 +25,18 @@ namespace DBGen
             {
                 string dataType = getDataType(dr["type"].ToString());
                 string colName = dr["name"].ToString();
-                sb.AppendLine("\t" + textInfo.ToTitleCase(colName.ToLower())   + ": " + dataType + ";");
+                sb.AppendLine("\t" + getColName(colName)   + ": " + dataType + ";");
                 sb.AppendLine();
             }
+        }
+
+        private string getColName(string colName)
+        {
+            if(!String.IsNullOrWhiteSpace(colName))
+            {
+              colName =  Char.ToLowerInvariant(colName[0]) + colName.Substring(1);
+            }
+            return colName;
         }
 
         private string getDataType(string dataType)

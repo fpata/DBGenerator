@@ -15,6 +15,11 @@ namespace DBGen
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("using System;");
+            if (requireEFMappings)
+            {
+                sb.AppendLine("using System.DataAnnotations.ComponentModel;");
+                sb.AppendLine("using System.DataAnnotations.ComponentModel.Schema;");
+            }
             sb.AppendLine("namespace CodeGen");
             sb.AppendLine("{");
             if (requireEFMappings)
@@ -29,18 +34,19 @@ namespace DBGen
 
         private void appendProperty(ref StringBuilder sb, DataTable dtColumns, bool requireEFMappings)
         {
-            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            //TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             foreach (DataRow dr in dtColumns.Rows)
             {
                 string dataType = getDataType(dr["type"].ToString());
                 string colName = dr["name"].ToString();
                 if (requireEFMappings)
                     sb.AppendLine("\t\t[Column(\"" + colName + "\")]");
-                sb.AppendLine("\t\tpublic " + dataType + " " + textInfo.ToTitleCase(colName.ToLower()) + "{ get; set; }");
+                sb.AppendLine("\t\tpublic " + dataType + " " + colName + "{ get; set; }");
                 sb.AppendLine();
             }
         }
 
+       
         private string getDataType(string dataType)
         {
             string retType = String.Empty;

@@ -24,22 +24,29 @@ namespace DBGen
         {
             string message = string.Empty;
             bool isValid = validate(out message);
-            if (isValid)
+            try
             {
-                DBGen.DBType dbType;
-                DBFactory factory = new DBFactory();
-                if (rbSqlite.Checked) dbType = DBType.Sqlite;
-                else if (rbMySQL.Checked) dbType = DBType.MySQL;
-                else if (rbOracle.Checked) dbType = DBType.Oracle;
-                else dbType = DBType.SqlServer;
-                dbHelper = factory.GetDBInstance(txtConnectString.Text, dbType);
-                DataTable dtTables = dbHelper.GetTables();
-                grdTables.DataSource = dtTables;
-                SetTableNames();
+                if (isValid)
+                {
+                    DBGen.DBType dbType;
+                    DBFactory factory = new DBFactory();
+                    if (rbSqlite.Checked) dbType = DBType.Sqlite;
+                    else if (rbMySQL.Checked) dbType = DBType.MySQL;
+                    else if (rbOracle.Checked) dbType = DBType.Oracle;
+                    else dbType = DBType.SqlServer;
+                    dbHelper = factory.GetDBInstance(txtConnectString.Text, dbType);
+                    DataTable dtTables = dbHelper.GetTables();
+                    grdTables.DataSource = dtTables;
+                    SetTableNames();
+                }
+                else
+                {
+                    MessageBox.Show(message, "Validaton Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show(message, "Validaton Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString());
             }
         }
 
