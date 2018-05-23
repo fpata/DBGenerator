@@ -53,6 +53,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cbTables = new System.Windows.Forms.ComboBox();
             this.chkEFMapping = new System.Windows.Forms.CheckBox();
+            this.tbBaseRepo = new System.Windows.Forms.TabPage();
+            this.tbRepositry = new System.Windows.Forms.TabPage();
+            this.txtBaseRepository = new System.Windows.Forms.RichTextBox();
+            this.txtRepository = new System.Windows.Forms.RichTextBox();
             this.pnlDBConfig.SuspendLayout();
             this.grbDBSelect.SuspendLayout();
             this.tbSchema.SuspendLayout();
@@ -64,6 +68,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
             this.tbCSharp.SuspendLayout();
             this.tbTypeScript.SuspendLayout();
+            this.tbBaseRepo.SuspendLayout();
+            this.tbRepositry.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDBConfig
@@ -187,6 +193,8 @@
             this.tbSchema.Controls.Add(this.tbData);
             this.tbSchema.Controls.Add(this.tbCSharp);
             this.tbSchema.Controls.Add(this.tbTypeScript);
+            this.tbSchema.Controls.Add(this.tbBaseRepo);
+            this.tbSchema.Controls.Add(this.tbRepositry);
             this.tbSchema.Location = new System.Drawing.Point(14, 147);
             this.tbSchema.Name = "tbSchema";
             this.tbSchema.SelectedIndex = 0;
@@ -315,6 +323,44 @@
             this.chkEFMapping.Text = "EF Mapping";
             this.chkEFMapping.UseVisualStyleBackColor = true;
             // 
+            // tbBaseRepo
+            // 
+            this.tbBaseRepo.Controls.Add(this.txtBaseRepository);
+            this.tbBaseRepo.Location = new System.Drawing.Point(4, 22);
+            this.tbBaseRepo.Name = "tbBaseRepo";
+            this.tbBaseRepo.Padding = new System.Windows.Forms.Padding(3);
+            this.tbBaseRepo.Size = new System.Drawing.Size(793, 312);
+            this.tbBaseRepo.TabIndex = 5;
+            this.tbBaseRepo.Text = "DALBaseRepository";
+            this.tbBaseRepo.UseVisualStyleBackColor = true;
+            // 
+            // tbRepositry
+            // 
+            this.tbRepositry.Controls.Add(this.txtRepository);
+            this.tbRepositry.Location = new System.Drawing.Point(4, 22);
+            this.tbRepositry.Name = "tbRepositry";
+            this.tbRepositry.Padding = new System.Windows.Forms.Padding(3);
+            this.tbRepositry.Size = new System.Drawing.Size(793, 312);
+            this.tbRepositry.TabIndex = 6;
+            this.tbRepositry.Text = "DAL Repository";
+            this.tbRepositry.UseVisualStyleBackColor = true;
+            // 
+            // txtBaseRepository
+            // 
+            this.txtBaseRepository.Location = new System.Drawing.Point(14, 7);
+            this.txtBaseRepository.Name = "txtBaseRepository";
+            this.txtBaseRepository.Size = new System.Drawing.Size(764, 299);
+            this.txtBaseRepository.TabIndex = 6;
+            this.txtBaseRepository.Text = "";
+            // 
+            // txtRepository
+            // 
+            this.txtRepository.Location = new System.Drawing.Point(14, 7);
+            this.txtRepository.Name = "txtRepository";
+            this.txtRepository.Size = new System.Drawing.Size(764, 299);
+            this.txtRepository.TabIndex = 7;
+            this.txtRepository.Text = "";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -341,6 +387,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
             this.tbCSharp.ResumeLayout(false);
             this.tbTypeScript.ResumeLayout(false);
+            this.tbBaseRepo.ResumeLayout(false);
+            this.tbRepositry.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,6 +421,10 @@
         private System.Windows.Forms.ComboBox cbTables;
         private System.Windows.Forms.CheckBox chkEFMapping;
         private System.Windows.Forms.RichTextBox txtTypeScript;
+        private System.Windows.Forms.TabPage tbBaseRepo;
+        private System.Windows.Forms.TabPage tbRepositry;
+        private System.Windows.Forms.RichTextBox txtBaseRepository;
+        private System.Windows.Forms.RichTextBox txtRepository;
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBGen.Templates;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -58,6 +59,7 @@ namespace DBGen
             {
                 cbTables.Items.Add(dr["Name"]);
             }
+
         }
 
         private bool validate(out String message)
@@ -114,13 +116,25 @@ namespace DBGen
                 ICodeHelper helper = new TypScriptCodeHelper();
                 txtTypeScript.Text = helper.GetCode(cbTables.SelectedItem.ToString(), dtColumns, chkEFMapping.Checked);
             }
+            else if (tbSchema.SelectedTab.Name.Equals(tbRepositry.Name))
+            {
+                cbTables.Enabled = true;
+                chkEFMapping.Enabled = false;
+                txtRepository.Text = BaseRepositryTemplate.GetRepositry(cbTables.SelectedItem.ToString());
+            }
         }
 
         private void tbSchema_SelectedIndexChanged(object sender, EventArgs e)
         {
+          
             if (tbSchema.SelectedTab.Name.Equals(tbtables.Name))
             {
                 cbTables.Enabled = false;
+                chkEFMapping.Enabled = false;
+            }
+            else if (tbSchema.SelectedTab.Name.Equals(tbColumns.Name))
+            {
+                cbTables.Enabled = true;
                 chkEFMapping.Enabled = false;
             }
             else if (tbSchema.SelectedTab.Name.Equals(tbData.Name))
@@ -134,6 +148,17 @@ namespace DBGen
                 chkEFMapping.Enabled = true;
             }
             else if (tbSchema.SelectedTab.Name.Equals(tbTypeScript.Name))
+            {
+                cbTables.Enabled = true;
+                chkEFMapping.Enabled = false;
+            }
+            else if (tbSchema.SelectedTab.Name.Equals(tbBaseRepo.Name))
+            {
+                cbTables.Enabled = false;
+                chkEFMapping.Enabled = false;
+                txtBaseRepository.Text = SqliteBaseRepositoryTemplate.GetBaseTemplate();
+            }
+            else if (tbSchema.SelectedTab.Name.Equals(tbRepositry.Name))
             {
                 cbTables.Enabled = true;
                 chkEFMapping.Enabled = false;

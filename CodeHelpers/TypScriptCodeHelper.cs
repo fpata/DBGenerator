@@ -11,8 +11,8 @@ namespace DBGen
         {
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("export class " + tableName);
-            sb.Append(" {");
+            sb.Append("export class " + tableName);
+            sb.AppendLine(" {");
             appendProperty(ref sb, dtColumns);
             sb.AppendLine("}");
             return sb.ToString();
