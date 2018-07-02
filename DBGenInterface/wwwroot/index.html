@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>DB Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bg-dark" style="text-align:center">
+                    <h1 style="color:antiquewhite;">Database Code Generator</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <hr style="color:darkolivegreen; height:2px" />
+            </div>
+        </div>
+        <section>
+            <div class="card">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <label>Connection String</label>
+                        </div>
+                    <div class="col-lg-10">
+                        <input class="form-control" id="connectStr" placeholder="Connection String" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-3">
+                        <input type="radio" name="DBType" value="SQLite" /> <label>Sqlite</label>
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="radio" name="DBType" value="MySQL" /><label>My SQL</label>
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="radio" name="DBType" value="SQLServer" /><label>SQL Server</label>
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="radio" name="DBType" value="Oracle" /><label>Oracle</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="button" class="btn btn-primary" name="btnConnect" value="   Connect   " />
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="button" class="btn btn-primary" name="btnClear" value="    Clear     " />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br />
+        <section>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#Tables" data-toggle="tab" role="tab" aria-controls="Tables" aria-selected="true">Tables</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#Columns" data-toggle="tab" role="tab" aria-controls="Tables" aria-selected="false">Columns</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#CSharpCode" data-toggle="tab" role="tab" aria-controls="Tables" aria-selected="false">CSharp Code</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#TypeScriptCode" data-toggle="tab" role="tab" aria-controls="Tables" aria-selected="false">TypeScript Code</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane active" id="Tables" role="tabpanel" aria-labelledby="Tables">Tables</div>
+                        <div class="tab-pane" id="Columns" role="tabpanel" aria-labelledby="Columns">Columns</div>
+                        <div class="tab-pane" id="CSharpCode" role="tabpanel" aria-labelledby="CSharpCode">Csharp Code</div>
+                        <div class="tab-pane" id="TypeScriptCode" role="tabpanel" aria-labelledby="TypeScriptCode">Tyep Script</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>

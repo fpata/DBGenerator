@@ -39,9 +39,5 @@ namespace DBGenInterface.Controllers
             String code = codeHelper.GetCode(tableName, sqlColumns, false);
             return code;
         }
-        
-       
-
-
     }
 }
