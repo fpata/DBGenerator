@@ -3,11 +3,11 @@ using System.Data;
 
 namespace DBGen
 {
-    internal abstract class IDBHelper
+    public abstract class IDBHelper
     {
         protected IDbConnection dbConnection;
         protected IDbCommand dbCommand;
-        internal virtual bool TestConnection()
+        public virtual bool TestConnection()
         {
             bool isSuccess = true;
             try
@@ -42,10 +42,10 @@ namespace DBGen
         }
 
 
-        internal abstract DataTable GetTables();
-        internal abstract DataTable GetTableNames();
-        internal abstract DataTable GetColumns(string tableName);
-        internal abstract DataTable GetData(string tableName);
+        public abstract DataTable GetTables();
+        public abstract DataTable GetTableNames();
+        public abstract DataTable GetColumns(string tableName);
+        public abstract DataTable GetData(string tableName);
 
     }
 }

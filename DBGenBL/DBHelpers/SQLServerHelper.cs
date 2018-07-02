@@ -8,34 +8,34 @@ using System.Threading.Tasks;
 
 namespace DBGen.DBHelpers
 {
-    internal class SQLServerHelper : IDBHelper
+    public class SQLServerHelper : IDBHelper
     {
         private string connectionString;
 
-        internal SQLServerHelper(string connectStr)
+        public SQLServerHelper(string connectStr)
         {
             this.connectionString = connectStr;
-            base.dbConnection = new SqlConnection(this.connectionString);
+            base.dbConnection = new  SqlConnection(this.connectionString);
         }
-        internal override DataTable GetColumns(string tableName)
+        public override DataTable GetColumns(string tableName)
         {
             DataTable dtTables = base.ExecuteQuery(" select COLUMN_NAME as name, DATA_TYPE as type, CHARACTER_MAXIMUM_LENGTH as length,  IS_NULLABLE from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME = '" + tableName + "'");
             return dtTables;
         }
 
-        internal override DataTable GetData(string tableName)
+        public override DataTable GetData(string tableName)
         {
             DataTable dtTables = base.ExecuteQuery("SELECT * FROM " + tableName + " LIMIT 10");
             return dtTables;
         }
 
-        internal override DataTable GetTableNames()
+        public override DataTable GetTableNames()
         {
             DataTable dtTables = base.ExecuteQuery("SELECT TABLE_NAME as name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'");
             return dtTables;
         }
 
-        internal override DataTable GetTables()
+        public override DataTable GetTables()
         {
             DataTable dtTables = base.ExecuteQuery("SELECT * FROM INFORMATION_SCHEMA.TABLES ");
             return dtTables;

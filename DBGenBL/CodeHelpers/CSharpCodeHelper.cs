@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DBGen
 {
-    internal class CSharpCodeHelper:ICodeHelper
+    public class CSharpCodeHelper:ICodeHelper
     {
         public CSharpCodeHelper()
         {
@@ -24,7 +24,7 @@ namespace DBGen
             sb.AppendLine("{");
             if (requireEFMappings)
                 sb.AppendLine("\t[Table(\"" + tableName + "\")]");
-            sb.AppendLine("\tinternal class " + tableName);
+            sb.AppendLine("\tpublic class " + tableName);
             sb.AppendLine("\t{");
             appendProperty(ref sb, dtColumns, requireEFMappings);
             sb.AppendLine("\t}");

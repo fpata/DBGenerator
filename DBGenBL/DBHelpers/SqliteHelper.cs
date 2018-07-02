@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
-using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using System.Data.Common;
 using System.Threading.Tasks;
 
 namespace DBGen.DBHelpers
 {
-    internal class SqliteHelper:IDBHelper
+    public class SqliteHelper:IDBHelper
     {
         private string connectionString;
       
@@ -16,31 +16,31 @@ namespace DBGen.DBHelpers
         public SqliteHelper(string connectStr)
         {
             this.connectionString = connectStr;
-            base.dbConnection = new SQLiteConnection(this.connectionString);
+            base.dbConnection = new SqliteConnection(this.connectionString);
            
         }
 
 
-        internal override DataTable GetTables()
+        public override DataTable GetTables()
         {
             DataTable dtTables = base.ExecuteQuery("SELECT Name FROM sqlite_master where type = 'table'");
             return dtTables;
         }
 
 
-        internal override DataTable GetTableNames()
+        public override DataTable GetTableNames()
         {
             DataTable dtTables = base.ExecuteQuery("SELECT Name FROM sqlite_master where type = 'table'");
             return dtTables;
         }
 
-        internal override DataTable GetColumns(string tableName)
+        public override DataTable GetColumns(string tableName)
         {
             DataTable dtTables = base.ExecuteQuery("PRAGMA table_info('"+tableName+"')");
             return dtTables;
         }
 
-        internal override DataTable GetData(string tableName)
+        public override DataTable GetData(string tableName)
         {
             DataTable dtTables = base.ExecuteQuery("Select * from " + tableName + " LIMIT 10");
             return dtTables;

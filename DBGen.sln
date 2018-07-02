@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBGen", "DBGen.csproj", "{F82582B0-FC2D-4279-B123-A2EAACD0360C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBGenInterface", "DBGenInterface\DBGenInterface.csproj", "{1198C7DE-D091-40B8-AF18-A5F3F5BADCEF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBGenBL", "DBGenBL\DBGenBL.csproj", "{1C455D4E-BDD1-43FB-BDB2-675BB99D09F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F82582B0-FC2D-4279-B123-A2EAACD0360C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F82582B0-FC2D-4279-B123-A2EAACD0360C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F82582B0-FC2D-4279-B123-A2EAACD0360C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F82582B0-FC2D-4279-B123-A2EAACD0360C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1198C7DE-D091-40B8-AF18-A5F3F5BADCEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1198C7DE-D091-40B8-AF18-A5F3F5BADCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1198C7DE-D091-40B8-AF18-A5F3F5BADCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1198C7DE-D091-40B8-AF18-A5F3F5BADCEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C455D4E-BDD1-43FB-BDB2-675BB99D09F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C455D4E-BDD1-43FB-BDB2-675BB99D09F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C455D4E-BDD1-43FB-BDB2-675BB99D09F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C455D4E-BDD1-43FB-BDB2-675BB99D09F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

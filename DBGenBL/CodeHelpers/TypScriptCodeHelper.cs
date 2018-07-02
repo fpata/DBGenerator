@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DBGen
 {
-    internal class TypScriptCodeHelper : ICodeHelper
+    public class TypScriptCodeHelper : ICodeHelper
     {
         public string GetCode(string tableName, DataTable dtColumns, bool requireEFMappings)
         {

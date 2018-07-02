@@ -3,7 +3,7 @@ using System.Data;
 
 namespace DBGen
 {
-    internal interface ICodeHelper
+    public interface ICodeHelper
     {
         String GetCode(String tableName, DataTable dtColumns, bool requireEFMappings);
     }
