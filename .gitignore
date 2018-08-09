@@ -1,33 +1,7 @@
-#ignore thumbnails created by windows
-Thumbs.db
-#Ignore files build by Visual Studio
-*.user
-*.aps
-*.pch
-*.vspscc
-*_i.c
-*_p.c
-*.ncb
-*.suo
-*.bak
-*.cache
-*.ilk
-*.log
-*.dll
-[Bb]in
-[Dd]ebug*/
-[Pp]ackages
-*.sbr
-obj/
-.vs/
-[Rr]elease*/
-_ReSharper*/
-
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
 /dist
-/dist-server
 /tmp
 /out-tsc
 
@@ -59,10 +33,6 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
 
 # System Files
 .DS_Store
