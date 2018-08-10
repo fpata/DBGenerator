@@ -1,6 +1,46 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  
+<mat-toolbar color="primary">
+  <span style="font-weight: bold">Database Generator</span>
+</mat-toolbar>
+<mat-card>
+  <mat-card-title>
+    <h5>Schema Manager</h5>
+  </mat-card-title>
+  <mat-card-content>
+    <mat-form-field class="width80">
+      <input matInput placeholder="Connection String" id="txtConectStr" [(ngModel)]="connectStr">
+    </mat-form-field>&nbsp;&nbsp;
+    <button mat-raised-button color="primary" id="btnConnect" (click)="btnConnect_click($event)">Connect</button>&nbsp;&nbsp;
+    <button mat-raised-button color="default" id="btnClear" (click)="btnClear_click($event)">Clear</button>
+    <br>
+
+    <mat-form-field class="width80">
+        <mat-select placeholder="Tables" id="cbTables" [(ngModel)]="selectedTable" >
+        </mat-select>
+      </mat-form-field>
+      
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-tab-group>
+      <mat-tab label="Tables">
+        <div id="tableContainer">
+        </div>
+      </mat-tab>
+      <mat-tab label="Columns">
+        <div id="columnContainer">
+        </div>
+      </mat-tab>
+      <mat-tab label="CSharp Code">
+        <mat-form-field class="width100">
+          <textarea matInput placeholder="CSharp Code" id="txtCSharp"></textarea>
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="TypeScript Code">
+        <mat-form-field class="width100">
+          <textarea matInput placeholder="TypeScript Code" id="txtTypeScript"></textarea>
+        </mat-form-field>
+      </mat-tab>
+    </mat-tab-group>
+
+  </mat-card-content>
+</mat-card>
