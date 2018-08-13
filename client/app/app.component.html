@@ -21,7 +21,7 @@
     <br>
     <mat-divider></mat-divider>
     <br>
-    <mat-tab-group>
+    <mat-tab-group (selectedTabChange)="tabChanged($event)">
       <mat-tab label="Tables">
         <div id="tableContainer">
         </div>

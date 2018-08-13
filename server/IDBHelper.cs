@@ -22,23 +22,27 @@ namespace DBGen
             return isSuccess;
         }
 
-        protected virtual DataTable ExecuteQuery(string query)
+        protected virtual DataTable ExecuteQuery(string query, IDbDataAdapter dataAdapter)
         {
-            DataTable dtTables = new DataTable();
+            DataSet ds = new DataSet();
             try
             {
                 dbCommand = dbConnection.CreateCommand();
                 dbCommand.CommandText = query;
-                dbCommand.Connection.Open();
-                IDataReader dbReader = dbCommand.ExecuteReader(CommandBehavior.CloseConnection);
-                dtTables.Load(dbReader, LoadOption.OverwriteChanges);
-               
+                dbCommand.Connection = dbConnection;
+                dataAdapter.SelectCommand = dbCommand;
+                dataAdapter.Fill(ds);
             }
             catch(Exception ex)
             {
-                ex.ToString();
+                System.Diagnostics.Trace.WriteLine(ex.ToString());
             }
-            return dtTables;
+            finally
+            {
+                if(dbConnection.State != ConnectionState.Closed)
+                dbConnection.Close();
+            }
+            return ds.Tables[0];
         }
 
 

@@ -10,7 +10,7 @@ namespace DBGen
            switch (dbType)
             {
                 case DBType.Sqlite:
-                    dbHelper = new DBGen.DBHelpers.SqliteHelper(connectStr);
+                    dbHelper = new DBGen.DBHelpers.SQLiteHelper(connectStr);
                     break;
                 case DBType.SqlServer:
                     dbHelper = new DBGen.DBHelpers.SQLServerHelper(connectStr);

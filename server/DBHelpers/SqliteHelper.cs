@@ -2,47 +2,50 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
-using Microsoft.Data.Sqlite;
 using System.Data.Common;
 using System.Threading.Tasks;
+using System.Data.SQLite;
 
 namespace DBGen.DBHelpers
 {
-    public class SqliteHelper:IDBHelper
+    public class SQLiteHelper:IDBHelper
     {
         private string connectionString;
       
 
-        public SqliteHelper(string connectStr)
+        public SQLiteHelper(string connectStr)
         {
             this.connectionString = connectStr;
-            base.dbConnection = new SqliteConnection(this.connectionString);
+            base.dbConnection = new SQLiteConnection(this.connectionString);
            
         }
 
 
         public override DataTable GetTables()
         {
-            DataTable dtTables = base.ExecuteQuery("SELECT Name FROM sqlite_master where type = 'table'");
+            DataTable dtTables = base.ExecuteQuery("SELECT Name FROM SQLite_master where type = 'table'"
+            , new SQLiteDataAdapter());
             return dtTables;
         }
 
 
         public override DataTable GetTableNames()
         {
-            DataTable dtTables = base.ExecuteQuery("SELECT Name FROM sqlite_master where type = 'table'");
+
+            DataTable dtTables = base.ExecuteQuery("SELECT Name FROM SQLite_master where type = 'table'",
+            new SQLiteDataAdapter() );
             return dtTables;
         }
 
         public override DataTable GetColumns(string tableName)
         {
-            DataTable dtTables = base.ExecuteQuery("PRAGMA table_info('"+tableName+"')");
+            DataTable dtTables = base.ExecuteQuery("PRAGMA table_info('"+tableName+"')",new SQLiteDataAdapter());
             return dtTables;
         }
 
         public override DataTable GetData(string tableName)
         {
-            DataTable dtTables = base.ExecuteQuery("Select * from " + tableName + " LIMIT 10");
+            DataTable dtTables = base.ExecuteQuery("Select * from " + tableName + " LIMIT 10", new SQLiteDataAdapter());
             return dtTables;
         }
 
