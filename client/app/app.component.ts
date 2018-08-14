@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { MatTabChangeEvent } from '@angular/material';
 import { SchemaService } from './app.schema.service';
+import { createInjectable } from '../../node_modules/@angular/compiler/src/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  
   title = 'DBGen';
   connectStr: String = '';
   selectedTable: String = '';
@@ -17,7 +19,7 @@ export class AppComponent {
   btnConnect_click($event) {
     this.appService.getTables(this.connectStr).subscribe(
       data => { this.tables = JSON.parse(data._body);
-        console.log(this.tables);
+        this.createTable();
       });
     }
 
@@ -27,5 +29,8 @@ export class AppComponent {
 
     tabChanged(tabChangeEvent: MatTabChangeEvent): void {
       console.log(tabChangeEvent);
+  }
+
+  createTable(): any {
   }
 }
