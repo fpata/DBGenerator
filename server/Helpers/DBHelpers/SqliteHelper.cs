@@ -23,7 +23,7 @@ namespace DBGen.DBHelpers
 
         public override DataTable GetTables()
         {
-            DataTable dtTables = base.ExecuteQuery("SELECT Name FROM SQLite_master where type = 'table'"
+            DataTable dtTables = base.ExecuteQuery("SELECT  rootpage, name, tbl_name,type FROM SQLite_master where type = 'table' order by rootpage"
             , new SQLiteDataAdapter());
             return dtTables;
         }
