@@ -18,6 +18,7 @@ namespace DBGen
             catch(Exception ex)
             {
                 isSuccess = false;
+                System.Diagnostics.Trace.WriteLine(ex.ToString());
             }
             return isSuccess;
         }

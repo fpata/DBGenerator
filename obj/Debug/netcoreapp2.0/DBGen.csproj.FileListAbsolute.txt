@@ -9,3 +9,14 @@ C:\Users\fpata\Documents\MyProjects\WIP_Projects\DBGen\obj\Debug\netcoreapp2.0\D
 C:\Users\fpata\Documents\MyProjects\WIP_Projects\DBGen\obj\Debug\netcoreapp2.0\DBGen.AssemblyInfo.cs
 C:\Users\fpata\Documents\MyProjects\WIP_Projects\DBGen\obj\Debug\netcoreapp2.0\DBGen.dll
 C:\Users\fpata\Documents\MyProjects\WIP_Projects\DBGen\obj\Debug\netcoreapp2.0\DBGen.pdb
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\bin\Debug\netcoreapp2.0\DBGen.deps.json
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\bin\Debug\netcoreapp2.0\DBGen.runtimeconfig.json
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\bin\Debug\netcoreapp2.0\DBGen.runtimeconfig.dev.json
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\bin\Debug\netcoreapp2.0\DBGen.dll
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\bin\Debug\netcoreapp2.0\DBGen.pdb
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\obj\Debug\netcoreapp2.0\DBGen.csprojAssemblyReference.cache
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\obj\Debug\netcoreapp2.0\DBGen.csproj.CoreCompileInputs.cache
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\obj\Debug\netcoreapp2.0\DBGen.AssemblyInfoInputs.cache
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\obj\Debug\netcoreapp2.0\DBGen.AssemblyInfo.cs
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\obj\Debug\netcoreapp2.0\DBGen.dll
+C:\Users\fpata\Documents\MyProjects\WIP\DBGenerator\obj\Debug\netcoreapp2.0\DBGen.pdb

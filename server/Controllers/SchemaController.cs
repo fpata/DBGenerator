@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Data;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -11,26 +12,29 @@ namespace DBGen
     public class SchemaController : Controller
     {
         [HttpPost]
-        public string GetTables([FromBody]String connectStr)
+        public string GetTables([FromBody]JObject objectData)
         {
-            if(String.IsNullOrEmpty(connectStr)) connectStr=@"Data Source=C:\Users\fpata\Documents\MyProjects\WIP_Projects\FPClinic\Data\MyClinic_Model.sqlite";
-            IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
+            IDBHelper dbhelper = DBFactory.GetDBInstance((string)objectData["connectStr"], DBType.Sqlite);
             DataTable dtTables = dbhelper.GetTables();
-         
             return DataTableToJSONString(dtTables);
         }
 
         [HttpPost]
-        public string GetColumns(string connectStr, string tableName)
+        public string GetColumns([FromBody]JObject objectData)
         {
+            var connectStr = (string)objectData["connectStr"];
+            var tableName = (string)objectData["tableName"];
             IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
             DataTable dtColumns = dbhelper.GetColumns(tableName);
-            return JsonConvert.SerializeObject(dtColumns);
+            return DataTableToJSONString(dtColumns);
         }
 
         [HttpPost]
-        public string GetCode(string connectStr, string tableName, string codeType)
+        public string GetCode([FromBody]JObject objectData)
         {
+            var connectStr = (string)objectData["connectStr"];
+            var tableName = (string)objectData["tableName"];
+            var codeType = (string)objectData["codeType"];
             IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
             DataTable dtColumns = dbhelper.GetColumns(tableName);
             ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType);
@@ -38,40 +42,60 @@ namespace DBGen
             return code;
         }
 
-        
-    private string DataTableToJSONString(DataTable table)   
-    {  
-        var JSONString = new StringBuilder();  
-        if (table.Rows.Count > 0)   
-        {  
-            JSONString.Append("[");  
-            for (int i = 0; i < table.Rows.Count; i++)   
-            {  
-                JSONString.Append("{");  
-                for (int j = 0; j < table.Columns.Count; j++)   
-                {  
-                    if (j < table.Columns.Count - 1)   
-                    {  
-                        JSONString.Append("\"" + table.Columns[j].ColumnName.ToString() + "\":" + "\"" + table.Rows[i][j].ToString() + "\",");  
-                    }   
-                    else if (j == table.Columns.Count - 1)   
-                    {  
-                        JSONString.Append("\"" + table.Columns[j].ColumnName.ToString() + "\":" + "\"" + table.Rows[i][j].ToString() + "\"");  
-                    }  
-                }  
-                if (i == table.Rows.Count - 1)   
-                {  
-                    JSONString.Append("}");  
-                }   
-                else   
-                {  
-                    JSONString.Append("},");  
-                }  
-            }  
-            JSONString.Append("]");  
-        }  
-        JSONString = JSONString.Replace(@"\","");
-        return JSONString.ToString();  
-    }   
+        [HttpPost]
+        public String CreateFiles([FromBody]JObject objectData)
+        {
+            var connectStr = (string)objectData["connectStr"];
+            var codeType = (string)objectData["codeType"];
+            string fileExtn = codeType.StartsWith('C') ? ".cs": ".ts";
+            IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
+            ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType);
+            DataTable dtTables = dbhelper.GetTables();
+            FileHelper fileHelper = new FileHelper();
+            String tableName = String.Empty;
+            foreach (DataRow dr in dtTables.Rows)
+            {
+                tableName = dr["Name"].ToString();
+                DataTable dtColumns = dbhelper.GetColumns(tableName);
+                String code = codeHelper.GetCode(tableName, dtColumns, false);
+                fileHelper.WriteFile(tableName + fileExtn , code );
+            }
+            return "Process Complete";
+        }
+
+        private string DataTableToJSONString(DataTable table)
+        {
+            var JSONString = new StringBuilder();
+            if (table.Rows.Count > 0)
+            {
+                JSONString.Append("[");
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    JSONString.Append("{");
+                    for (int j = 0; j < table.Columns.Count; j++)
+                    {
+                        if (j < table.Columns.Count - 1)
+                        {
+                            JSONString.Append("\"" + table.Columns[j].ColumnName.ToString() + "\":" + "\"" + table.Rows[i][j].ToString() + "\",");
+                        }
+                        else if (j == table.Columns.Count - 1)
+                        {
+                            JSONString.Append("\"" + table.Columns[j].ColumnName.ToString() + "\":" + "\"" + table.Rows[i][j].ToString() + "\"");
+                        }
+                    }
+                    if (i == table.Rows.Count - 1)
+                    {
+                        JSONString.Append("}");
+                    }
+                    else
+                    {
+                        JSONString.Append("},");
+                    }
+                }
+                JSONString.Append("]");
+            }
+            JSONString = JSONString.Replace(@"\", "");
+            return JSONString.ToString();
+        }
     }
 }

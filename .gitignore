@@ -6,6 +6,7 @@
 /out-tsc
 /obj
 /bin
+/CodeFiles
 
 # dependencies
 /node_modules

@@ -11,26 +11,64 @@ import { createInjectable } from '../../node_modules/@angular/compiler/src/core'
 export class AppComponent {
   
   title = 'DBGen';
-  connectStr: String = '';
-  selectedTable: String = '';
+  connectStr: string = '';
+  selectedTable: string = '';
+  selectedTabIndex = 0;
   tables = [];
+  tableColumns = [];
+  codeCSharp:string = '';
+  codeTypeScript :string = '';
+  displayedTableColumns: string[] = ['Name'];
+  displayedColumns :string[] = ['ColumnName', 'Type'];
   constructor(private appService: SchemaService) { }
 
   btnConnect_click($event) {
     this.appService.getTables(this.connectStr).subscribe(
       data => { this.tables = JSON.parse(data._body);
-        this.createTable();
       });
     }
 
     btnClear_click($event) {
-      alert('btnClear_click');
+     window.location.reload();
+    }
+
+    cbTables_Select($event) {
+     this.selectedTable = $event.value;
+      this.setDataInTabs(this.selectedTabIndex);
     }
 
     tabChanged(tabChangeEvent: MatTabChangeEvent): void {
-      console.log(tabChangeEvent);
-  }
+    this.selectedTabIndex = tabChangeEvent.index;
+    this.setDataInTabs(this.selectedTabIndex);
+    }
 
-  createTable(): any {
-  }
+    createFiles(codeType): void {
+      this.appService.createFiles(this.connectStr,codeType).subscribe( response => console.log(response));
+    }
+
+    setDataInTabs(tabIndex:number){
+      switch (tabIndex) {
+        case 1:
+        this.appService.getColumns(this.connectStr,this.selectedTable).subscribe(
+          data => { this.tableColumns = JSON.parse(data._body);
+           
+          });
+          break;
+          case 2:
+          this.appService.getCode(this.connectStr,this.selectedTable, "CSharp").subscribe(
+            data => { this.codeCSharp = data._body;
+              console.log(this.codeCSharp);
+            });
+            break;
+            case 3:
+            this.appService.getCode(this.connectStr,this.selectedTable, "TypeScript").subscribe(
+            data => { this.codeTypeScript = data._body;
+              console.log(this.codeTypeScript);
+            });
+            break;
+        default:
+          break;
+      }
+    }
+
 }
