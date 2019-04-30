@@ -5,48 +5,47 @@ using System.Text;
 
 namespace DBGen
 {
-    public class CSharpCodeHelper:ICodeHelper
+    public class CSharpCodeHelper : ICodeHelper
     {
         public CSharpCodeHelper()
         {
         }
 
-        public string GetCode(string tableName, DataTable dtColumns,bool requireEFMappings)
+        public string GetCode(string tableName, DataTable dtColumns, ORM ORMType)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("using System;");
-            if (requireEFMappings)
-            {
-                sb.AppendLine("using System.DataAnnotations.ComponentModel;");
-                sb.AppendLine("using System.DataAnnotations.ComponentModel.Schema;");
-            }
+            sb.Append(GetORMUsingClause(ORMType));
+
+            sb.AppendLine();
             sb.AppendLine("namespace CodeGen");
             sb.AppendLine("{");
-            if (requireEFMappings)
+            if (!ORMType.Equals(ORM.None))
                 sb.AppendLine("\t[Table(\"" + tableName + "\")]");
             sb.AppendLine("\tpublic class " + tableName);
             sb.AppendLine("\t{");
-            appendProperty(ref sb, dtColumns, requireEFMappings);
+            sb.AppendLine();
+            appendProperty(ref sb, dtColumns, ORMType);
             sb.AppendLine("\t}");
             sb.AppendLine("}");
             return sb.ToString();
         }
 
-        private void appendProperty(ref StringBuilder sb, DataTable dtColumns, bool requireEFMappings)
+        private void appendProperty(ref StringBuilder sb, DataTable dtColumns, ORM ORMType)
         {
             //TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             foreach (DataRow dr in dtColumns.Rows)
             {
                 string dataType = getDataType(dr["type"].ToString());
                 string colName = dr["name"].ToString();
-                if (requireEFMappings)
+                if (ORMType.Equals(ORM.EntityFramework))
                     sb.AppendLine("\t\t[Column(\"" + colName + "\")]");
-                sb.AppendLine("\t\tpublic " + dataType + " " + colName + "{ get; set; }");
+                sb.AppendLine("\t\tpublic " + dataType + " " + colName + " { get; set; }");
                 sb.AppendLine();
             }
         }
 
-       
+
         private string getDataType(string dataType)
         {
             string retType = String.Empty;
@@ -76,5 +75,28 @@ namespace DBGen
             }
             return retType;
         }
+
+
+        private string GetORMUsingClause(ORM ORMType)
+        {
+            StringBuilder sb = new StringBuilder();
+            switch (ORMType)
+            {
+                case ORM.EntityFramework:
+                    sb.AppendLine("using System.DataAnnotations.ComponentModel;");
+                    sb.AppendLine("using System.DataAnnotations.ComponentModel.Schema;");
+                    break;
+                    case ORM.Dapper:
+                      sb.AppendLine("using Dapper;");
+                    break;
+            }
+            return sb.ToString();
+        }
+    }
+    public enum ORM
+    {
+        None,
+        EntityFramework,
+        Dapper
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { MatTabChangeEvent, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatTabChangeEvent, MatPaginator, MatTableDataSource, MatRadioButton, MatRadioGroup } from '@angular/material';
 import { SchemaService } from './app.schema.service';
 import { createInjectable } from '../../node_modules/@angular/compiler/src/core';
 @Component({
@@ -12,6 +12,8 @@ export class AppComponent {
 
   title = 'DBGen';
   connectStr: string = '';
+  ORM: string = 'None';
+  DBType: string = "SQLite"
   selectedTable: string = '';
   selectedTabIndex = 0;
   tables = new MatTableDataSource([]);
@@ -26,13 +28,16 @@ export class AppComponent {
 
   constructor(private appService: SchemaService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.tables.paginator = this.tablePaginator;
     this.tableColumns.paginator = this.columnPaginator;
   }
 
   btnConnect_click($event) {
-    this.appService.getTables(this.connectStr).subscribe(
+    this.connectStr = this.connectStr.split('\\').join('/');
+    if (!this.connectStr.startsWith('Data Source')) this.connectStr = 'Data Source=' + this.connectStr;
+
+    this.appService.getTables(this.connectStr, this.DBType).subscribe(
       data => {
         this.tables.data = JSON.parse(data._body);
 
@@ -42,7 +47,7 @@ export class AppComponent {
         });
         this.displayedTableColumns = keysArray;
 
-      
+
       });
   }
 
@@ -60,35 +65,33 @@ export class AppComponent {
     this.setDataInTabs(this.selectedTabIndex);
   }
 
+  ORM_Change($event){
+this.GetAppCode();
+  }
   createFiles(codeType): void {
-    this.appService.createFiles(this.connectStr, codeType).subscribe(response => console.log(response));
+    this.appService.createFiles(this.connectStr, this.DBType,codeType, this.ORM).subscribe(response => console.log(response));
   }
 
   setDataInTabs(tabIndex: number) {
     if (this.selectedTable == null || this.selectedTable == 'undefined') return;
     switch (tabIndex) {
       case 1:
-        this.appService.getColumns(this.connectStr, this.selectedTable).subscribe(
+        this.appService.getColumns(this.connectStr,this.DBType, this.selectedTable).subscribe(
           data => {
             this.tableColumns.data = JSON.parse(data._body);
-           
+
             var keysArray = new Array<string>();
             Object.keys(this.tableColumns.data[0]).forEach(function (k) {
               keysArray.push(k);
             });
             this.displayedColumns = keysArray;
-
-           
           });
         break;
       case 2:
-        this.appService.getCode(this.connectStr, this.selectedTable, "CSharp").subscribe(
-          data => {
-            this.codeCSharp = data._body;
-          });
+        this.GetAppCode();
         break;
       case 3:
-        this.appService.getCode(this.connectStr, this.selectedTable, "TypeScript").subscribe(
+        this.appService.getCode(this.connectStr, this.DBType,  this.selectedTable,"TypeScript", this.ORM).subscribe(
           data => {
             this.codeTypeScript = data._body;
           });
@@ -96,5 +99,12 @@ export class AppComponent {
       default:
         break;
     }
+  }
+
+  GetAppCode(): void {
+    this.appService.getCode(this.connectStr, this.DBType,  this.selectedTable, "CSharp", this.ORM).subscribe(
+      data => {
+        this.codeCSharp = data._body;
+      });
   }
 }

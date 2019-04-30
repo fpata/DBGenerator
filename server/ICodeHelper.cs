@@ -5,6 +5,6 @@ namespace DBGen
 {
     public interface ICodeHelper
     {
-        String GetCode(String tableName, DataTable dtColumns, bool requireEFMappings);
+        String GetCode(String tableName, DataTable dtColumns, ORM ormType);
     }
 }

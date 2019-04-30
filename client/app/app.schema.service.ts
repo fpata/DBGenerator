@@ -16,9 +16,9 @@ export class SchemaService {
     // Resolve HTTP using the constructor
     constructor(private _http: Http) { }
 
-    getTables(connectStr:string): Observable<any> {
+    getTables(connectStr:string, DBType:string ): Observable<any> {
        
-        const postData = '{"connectStr" : "' + connectStr + '"}';
+        const postData = '{"connectStr" : "' + connectStr + '","DBType":"'+ DBType +'"}';
         return this._http.post('/api/Schema/GetTables', postData, this.httpOptions)
             .pipe(tap((response: Response) => {
                 return response.text();
@@ -27,9 +27,9 @@ export class SchemaService {
             );
     }
 
-    getColumns(connectStr:string, tableName:string): Observable<any> {
+    getColumns(connectStr:string, DBType:string, tableName:string): Observable<any> {
         
-        const postData = '{"connectStr" : "' + connectStr + '","tableName": "' + tableName + '" }';
+        const postData = '{"connectStr" : "' + connectStr + '","DBType":"'+ DBType +'","tableName": "' + tableName + '" }';
         return this._http.post('/api/Schema/GetColumns', postData, this.httpOptions)
             .pipe(tap((response: Response) => {
                 return response.text();
@@ -39,9 +39,9 @@ export class SchemaService {
     }
 
 
-    getCode(connectStr:string, tableName:string, CodeType:string): Observable<any> {
+    getCode(connectStr:string,  DBType:string, tableName:string, CodeType:string, ORM:string): Observable<any> {
       
-        const postData = '{"connectStr" : "' + connectStr + '","tableName": "' + tableName + '", "codeType" : "' + CodeType+'" }';
+        const postData = '{"connectStr" : "' + connectStr + '","DBType":"'+ DBType +'","tableName": "' + tableName + '", "codeType" : "' + CodeType+'", "ORM" : "' + ORM +'" }';
         return this._http.post('/api/Schema/GetCode', postData, this.httpOptions)
             .pipe(tap((response: Response) => {
                 return response.text();
@@ -50,8 +50,8 @@ export class SchemaService {
             );
     }
 
-    createFiles(connectStr:string, CodeType:string): any {
-        const postData = '{"connectStr" : "' + connectStr +  '", "codeType" : "' + CodeType+'" }';
+    createFiles(connectStr:string,  DBType:string, CodeType:string, ORM:string): any {
+        const postData = '{"connectStr" : "' + connectStr +  '","DBType":"'+ DBType +'", "codeType" : "' + CodeType+'", "ORM" : "' + ORM +'" }';
 
         return this._http.post('/api/Schema/CreateFiles', postData, this.httpOptions)
         .pipe(tap((response: Response) => {

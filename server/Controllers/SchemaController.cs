@@ -11,10 +11,16 @@ namespace DBGen
     [Route("api/[Controller]/[Action]")]
     public class SchemaController : Controller
     {
+        private string connectStr = String.Empty;
+        private string tableName = String.Empty;
+        private string codeType = String.Empty;
+        private ORM orm = ORM.None;
+
         [HttpPost]
         public string GetTables([FromBody]JObject objectData)
         {
-            IDBHelper dbhelper = DBFactory.GetDBInstance((string)objectData["connectStr"], DBType.Sqlite);
+            SetObjectData(objectData);
+            IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
             DataTable dtTables = dbhelper.GetTables();
             return DataTableToJSONString(dtTables);
         }
@@ -22,8 +28,7 @@ namespace DBGen
         [HttpPost]
         public string GetColumns([FromBody]JObject objectData)
         {
-            var connectStr = (string)objectData["connectStr"];
-            var tableName = (string)objectData["tableName"];
+            SetObjectData(objectData);
             IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
             DataTable dtColumns = dbhelper.GetColumns(tableName);
             return DataTableToJSONString(dtColumns);
@@ -32,22 +37,19 @@ namespace DBGen
         [HttpPost]
         public string GetCode([FromBody]JObject objectData)
         {
-            var connectStr = (string)objectData["connectStr"];
-            var tableName = (string)objectData["tableName"];
-            var codeType = (string)objectData["codeType"];
+            SetObjectData(objectData);
             IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
             DataTable dtColumns = dbhelper.GetColumns(tableName);
             ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType);
-            String code = codeHelper.GetCode(tableName, dtColumns, false);
+            String code = codeHelper.GetCode(tableName, dtColumns,orm);
             return code;
         }
 
         [HttpPost]
         public String CreateFiles([FromBody]JObject objectData)
         {
-            var connectStr = (string)objectData["connectStr"];
-            var codeType = (string)objectData["codeType"];
-            string fileExtn = codeType.StartsWith('C') ? ".cs": ".ts";
+            SetObjectData(objectData);
+            string fileExtn = codeType.StartsWith('C') ? ".cs" : ".ts";
             IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
             ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType);
             DataTable dtTables = dbhelper.GetTables();
@@ -57,11 +59,13 @@ namespace DBGen
             {
                 tableName = dr["Name"].ToString();
                 DataTable dtColumns = dbhelper.GetColumns(tableName);
-                String code = codeHelper.GetCode(tableName, dtColumns, false);
-                fileHelper.WriteFile(tableName + fileExtn , code );
+                String code = codeHelper.GetCode(tableName, dtColumns, orm);
+                fileHelper.WriteFile(tableName + fileExtn, code);
             }
             return "Process Complete";
         }
+
+
 
         private string DataTableToJSONString(DataTable table)
         {
@@ -96,6 +100,15 @@ namespace DBGen
             }
             JSONString = JSONString.Replace(@"\", "");
             return JSONString.ToString();
+        }
+
+        private void SetObjectData(JObject objectData)
+        {
+            this.connectStr = (String)(objectData["connectStr"]);
+            this.tableName = objectData["tableName"] == null ? String.Empty : (String)objectData["tableName"];
+            this.codeType = objectData["codeType"] == null ? String.Empty : (String)objectData["codeType"];
+            var ormval = objectData["ORM"] == null ? "None" : (String)objectData["ORM"];
+            orm = Enum.Parse<ORM>(ormval, true);
         }
     }
 }
