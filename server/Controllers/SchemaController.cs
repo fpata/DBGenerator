@@ -37,11 +37,21 @@ namespace DBGen
         [HttpPost]
         public string GetCode([FromBody]JObject objectData)
         {
+            String code = String.Empty;
             SetObjectData(objectData);
             IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
-            DataTable dtColumns = dbhelper.GetColumns(tableName);
             ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType);
-            String code = codeHelper.GetCode(tableName, dtColumns,orm);
+            if (codeType.Equals("CSharpDBContext", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var DALCodeHelper = (CSharpDALCodeHelper)codeHelper;
+                DataTable dtTables = dbhelper.GetTables();
+                code = DALCodeHelper.GetDBContextCode(dtTables);
+            }
+            else
+            {
+                DataTable dtColumns = dbhelper.GetColumns(tableName);
+                code = codeHelper.GetCode(tableName, dtColumns, orm);
+            }
             return code;
         }
 
@@ -64,9 +74,7 @@ namespace DBGen
             }
             return "Process Complete";
         }
-
-
-
+       
         private string DataTableToJSONString(DataTable table)
         {
             var JSONString = new StringBuilder();

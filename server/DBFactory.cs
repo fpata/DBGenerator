@@ -7,7 +7,7 @@ namespace DBGen
         public static IDBHelper GetDBInstance(string connectStr, DBType dbType)
         {
             IDBHelper dbHelper = null;
-           switch (dbType)
+            switch (dbType)
             {
                 case DBType.Sqlite:
                     dbHelper = new DBGen.DBHelpers.SQLiteHelper(connectStr);
@@ -26,8 +26,12 @@ namespace DBGen
             ICodeHelper codeHelper = null;
             switch (code)
             {
-                case "CSharp":
-                    codeHelper = new CSharpCodeHelper();
+                case "CSharpEntity":
+                    codeHelper = new CSharpEntityCodeHelper();
+                    break;
+                case "CSharpDAL":
+                case "CSharpDBContext":
+                    codeHelper = new CSharpDALCodeHelper();
                     break;
                 case "TypeScript":
                     codeHelper = new TypScriptCodeHelper();

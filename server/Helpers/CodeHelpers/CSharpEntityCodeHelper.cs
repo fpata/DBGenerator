@@ -5,12 +5,8 @@ using System.Text;
 
 namespace DBGen
 {
-    public class CSharpCodeHelper : ICodeHelper
+    public class CSharpEntityCodeHelper : ICodeHelper
     {
-        public CSharpCodeHelper()
-        {
-        }
-
         public string GetCode(string tableName, DataTable dtColumns, ORM ORMType)
         {
             StringBuilder sb = new StringBuilder();

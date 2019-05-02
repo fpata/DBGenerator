@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { MatTabChangeEvent, MatPaginator, MatTableDataSource, MatRadioButton, MatRadioGroup } from '@angular/material';
+import { MatTabChangeEvent, MatPaginator, MatTableDataSource, MatRadioButton, MatRadioGroup, MatRadioChange } from '@angular/material';
 import { SchemaService } from './app.schema.service';
 import { createInjectable } from '../../node_modules/@angular/compiler/src/core';
 @Component({
@@ -18,10 +18,13 @@ export class AppComponent {
   selectedTabIndex = 0;
   tables = new MatTableDataSource([]);
   tableColumns = new MatTableDataSource([]);
-  codeCSharp: string = '';
+  codeCSharpEntity: string = '';
+  codeCSharpDAL: String = '';
+  codeCSharpDALDbContext: String = '';
   codeTypeScript: string = '';
   displayedTableColumns: Array<string> = new Array<string>();
   displayedColumns: Array<string> = new Array<string>();
+  selectedCSharpTab = 0;
 
   @ViewChild('tablePaginator') tablePaginator: MatPaginator;
   @ViewChild('columnPaginator') columnPaginator: MatPaginator;
@@ -65,18 +68,23 @@ export class AppComponent {
     this.setDataInTabs(this.selectedTabIndex);
   }
 
-  ORM_Change($event){
-this.GetAppCode();
+  tabCSharpChanged(tabChangeEvent: MatTabChangeEvent): void {
+    this.selectedCSharpTab = tabChangeEvent.index;
+    this.GetCSharpCode(this.ORM, this.selectedCSharpTab);
+  }
+
+  ORM_Change($event) {
+    this.GetCSharpCode($event.value, this.selectedCSharpTab);
   }
   createFiles(codeType): void {
-    this.appService.createFiles(this.connectStr, this.DBType,codeType, this.ORM).subscribe(response => console.log(response));
+    this.appService.createFiles(this.connectStr, this.DBType, codeType, this.ORM).subscribe(response => console.log(response));
   }
 
   setDataInTabs(tabIndex: number) {
     if (this.selectedTable == null || this.selectedTable == 'undefined') return;
     switch (tabIndex) {
       case 1:
-        this.appService.getColumns(this.connectStr,this.DBType, this.selectedTable).subscribe(
+        this.appService.getColumns(this.connectStr, this.DBType, this.selectedTable).subscribe(
           data => {
             this.tableColumns.data = JSON.parse(data._body);
 
@@ -88,10 +96,10 @@ this.GetAppCode();
           });
         break;
       case 2:
-        this.GetAppCode();
+        this.GetCSharpCode(this.ORM, this.selectedCSharpTab);
         break;
       case 3:
-        this.appService.getCode(this.connectStr, this.DBType,  this.selectedTable,"TypeScript", this.ORM).subscribe(
+        this.appService.getCode(this.connectStr, this.DBType, this.selectedTable, "TypeScript", this.ORM).subscribe(
           data => {
             this.codeTypeScript = data._body;
           });
@@ -101,10 +109,41 @@ this.GetAppCode();
     }
   }
 
-  GetAppCode(): void {
-    this.appService.getCode(this.connectStr, this.DBType,  this.selectedTable, "CSharp", this.ORM).subscribe(
+
+
+  GetCSharpCode(orm: string, codeIndex: number): void {
+
+    var codeType: string = '';
+    var code:string = '';
+    switch (codeIndex) {
+      case 0:
+        codeType = 'CSharpEntity';
+        break;
+      case 1:
+        codeType = 'CSharpDAL';
+        break;
+      case 2:
+        codeType = 'CSharpDBContext';
+        break;
+      default:
+        codeType = 'CSharpEntity';
+        break;
+    }
+    this.appService.getCode(this.connectStr, this.DBType, this.selectedTable, codeType, orm).subscribe(
       data => {
-        this.codeCSharp = data._body;
+        code= data._body;
+        switch (codeIndex) {
+          case 0:
+            this.codeCSharpEntity = code;
+            break;
+          case 1:
+            this.codeCSharpDAL = code;
+            break;
+          case 2:
+            this.codeCSharpDALDbContext = code;
+            break;
+        }
       });
+     
   }
 }
