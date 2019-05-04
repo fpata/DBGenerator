@@ -1,0 +1,39 @@
+<mat-tab label="CSharp Code">
+    <br />
+    <div>
+        <mat-radio-group [(ngModel)]="ORM" (change)="ORM_Change($event)">
+            <mat-radio-button value="None" name="None" aria-selected="true"><span class="text-muted">None</span>
+            </mat-radio-button>
+            &nbsp;&nbsp;&nbsp;<mat-radio-button value="EntityFramework" name="Entity Framework"><span
+                    class="text-muted">Entity Framework</span></mat-radio-button>&nbsp;
+            &nbsp;&nbsp;&nbsp;<mat-radio-button value="Dapper" name="Dapper"><span class="text-muted">Dapper</span>
+            </mat-radio-button>
+        </mat-radio-group>
+        <span style="float: right;">
+            <button mat-raised-button color="primary" (click)="createFiles('CSharp')">Create File For Selected
+                Table</button>
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<button mat-raised-button color="primary"
+                (click)="createFiles('CSharp')">Create Files For All Tables</button>
+        </span>
+    </div>
+    <mat-tab-group (selectedTabChange)="tabCSharpChanged($event)">
+        <mat-tab label="Entity">
+            <mat-form-field class="width100">
+                <textarea matInput placeholder="CSharp Code" id="txtCSharpEntity" [ngModel]="codeCSharpEntity"
+                    rows="7"></textarea>
+            </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Data Access Entity">
+            <mat-form-field class="width100">
+                <textarea matInput placeholder="CSharp Code" id="txtCSharpDAL" [ngModel]="codeCSharpDAL"
+                    rows="7"></textarea>
+            </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Data Access DBContext">
+            <mat-form-field class="width100">
+                <textarea matInput placeholder="CSharp Code" id="txtCSharpDbContext" [ngModel]="codeCSharpDALDbContext"
+                    rows="7"></textarea>
+            </mat-form-field>
+        </mat-tab>
+    </mat-tab-group>
+</mat-tab>

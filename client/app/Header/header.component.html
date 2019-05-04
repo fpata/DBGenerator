@@ -1,0 +1,33 @@
+<div>
+    <div>
+        <mat-form-field class="width100">
+            <input matInput placeholder="Connection String" id="txtConectStr" [(ngModel)]="connectStr">
+        </mat-form-field>&nbsp;&nbsp;
+    </div>
+    <div>
+        <mat-radio-group [(ngModel)]="DBType">
+            <mat-radio-button value="SQLite" name="SQLite" aria-selected="true"><span class="text-muted">SQLite</span>
+            </mat-radio-button>
+            &nbsp;&nbsp;&nbsp;<mat-radio-button value="SQLServer" name="SqlServer"><span class="text-muted">SQL
+                    Server</span></mat-radio-button>&nbsp;
+            &nbsp;&nbsp;&nbsp;<mat-radio-button value="MySQL" name="MySQL"><span class="text-muted">MySql</span>
+            </mat-radio-button>
+            &nbsp;&nbsp;&nbsp;<mat-radio-button value="Oracle" name="Oracle"><span class="text-muted">Oracle</span>
+            </mat-radio-button>
+        </mat-radio-group>
+        <span style="float: right">
+            <button mat-raised-button color="primary" id="btnConnect"
+                (click)="btnConnect_click($event)">Connect</button>&nbsp;&nbsp;
+            <button mat-raised-button color="default" id="btnClear" (click)="btnClear_click($event)">Clear</button>
+        </span>
+    </div>
+    <br>
+    <mat-form-field class="width100">
+        <mat-select placeholder="Tables" id="cbTables" (ngModel)="selectedTable"
+            (selectionChange)="cbTables_Select($event)">
+            <mat-option *ngFor="let table of tables.data" [value]="table.name">
+                {{table.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
