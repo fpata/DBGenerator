@@ -6,11 +6,24 @@
     <app-header></app-header>
     <mat-divider></mat-divider>
     <br>
+
     <mat-tab-group (selectedTabChange)="tabChanged($event)">
+        <mat-tab label="Tables">
+            <br />
       <app-tables></app-tables>
+      </mat-tab>
+      <mat-tab label="Columns">
+          <br />
       <app-columns></app-columns>
+      </mat-tab>
+      <mat-tab label="CSharp Code">
+          <br />
       <app-csharp></app-csharp>
+      </mat-tab>
+      <mat-tab label="TypeScript Code">
+          <br />
       <app-typescript></app-typescript>
+      </mat-tab>
     </mat-tab-group>
   </mat-card-content>
 </mat-card>

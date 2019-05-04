@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
+import {  MatTableDataSource } from '@angular/material';
 import { SchemaService } from '../app.schema.service';
 
 @Component({
@@ -12,6 +12,6 @@ import { SchemaService } from '../app.schema.service';
     selectedTable: string = '';
     connectStr: string = '';
     DBType: string = "SQLite";
-
+   
     constructor(protected appService: SchemaService) { }
   }

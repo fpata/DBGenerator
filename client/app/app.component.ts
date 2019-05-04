@@ -13,10 +13,6 @@ export class AppComponent {
   title = 'DBGen';
   selectedTabIndex = 0;
 
-
-
-
-
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     this.selectedTabIndex = tabChangeEvent.index;
     //this.setDataInTabs(this.selectedTabIndex);

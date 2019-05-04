@@ -1,5 +1,4 @@
-<mat-tab label="Columns">
-    <br />
+
     <div id="columnContainer">
       <table mat-table [dataSource]="tableColumns" class="mat-elevation-z4">
         <ng-container *ngFor="let col of displayedColumns" matColumnDef="{{col}}">
@@ -11,4 +10,3 @@
       </table>
       <mat-paginator #columnPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
-  </mat-tab>
