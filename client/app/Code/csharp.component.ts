@@ -16,6 +16,9 @@ export class CSharpComponent extends BaseComponent {
   codeCSharpDALDbContext: String = '';
   selectedCSharpTab = 0;
 
+  public GetData(){
+    this.GetCSharpCode(this.ORM, this.selectedCSharpTab);
+  }
 
   tabCSharpChanged(tabChangeEvent: MatTabChangeEvent): void {
     this.selectedCSharpTab = tabChangeEvent.index;
@@ -28,7 +31,9 @@ export class CSharpComponent extends BaseComponent {
   }
 
   GetCSharpCode(orm: string, codeIndex: number): void {
-
+    this.connectStr = sessionStorage.getItem('ConnectStr');
+    this.DBType = sessionStorage.getItem('DBType');
+    this.selectedTable =  sessionStorage.getItem('SelectedTable');
     var codeType: string = '';
     var code: string = '';
     switch (codeIndex) {

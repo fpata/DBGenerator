@@ -24,7 +24,7 @@ export class TablesComponent extends BaseComponent {
     this.tables.paginator = this.tablePaginator;
   }
 
-  public GetCode()
+  public GetData()
   {
     this.connectStr = sessionStorage.getItem('ConnectStr');
     this.DBType = sessionStorage.getItem('DBType');

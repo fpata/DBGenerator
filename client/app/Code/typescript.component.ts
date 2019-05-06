@@ -10,7 +10,11 @@ import { BaseComponent } from '../Base/base.component';
 export class TypeScriptComponent extends BaseComponent {
   codeTypeScript: string = '';
   ORM: string = 'None';
+  
   public GetData(): void {
+    this.connectStr = sessionStorage.getItem('ConnectStr');
+    this.DBType = sessionStorage.getItem('DBType');
+    this.selectedTable =  sessionStorage.getItem('SelectedTable');
     this.appService.getCode(this.connectStr, this.DBType, this.selectedTable, "TypeScript", this.ORM).subscribe(
       data => {
         this.codeTypeScript = data._body;
