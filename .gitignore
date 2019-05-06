@@ -7,7 +7,7 @@
 /obj
 /bin
 /CodeFiles
-
+/wwwroot
 # dependencies
 /node_modules
 

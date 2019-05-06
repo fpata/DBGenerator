@@ -10,19 +10,19 @@
     <mat-tab-group (selectedTabChange)="tabChanged($event)">
         <mat-tab label="Tables">
             <br />
-      <app-tables></app-tables>
+      <app-tables #appTables></app-tables>
       </mat-tab>
       <mat-tab label="Columns">
           <br />
-      <app-columns></app-columns>
+      <app-columns #appColumns></app-columns>
       </mat-tab>
       <mat-tab label="CSharp Code">
           <br />
-      <app-csharp></app-csharp>
+      <app-csharp #appCSharp></app-csharp>
       </mat-tab>
       <mat-tab label="TypeScript Code">
           <br />
-      <app-typescript></app-typescript>
+      <app-typescript #appTypeScript></app-typescript>
       </mat-tab>
     </mat-tab-group>
   </mat-card-content>

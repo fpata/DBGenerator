@@ -11,10 +11,12 @@ import {ColumnsComponent} from './Schema/columns.component';
 import {CSharpComponent} from './Code/csharp.component';
 import {TypeScriptComponent} from './Code/typescript.component';
 import { SchemaService } from './app.schema.service';
+import { StorageServiceModule} from 'angular-webstorage-service';
+import { BaseComponent } from './Base/base.component';
 
 @NgModule({
   declarations: [
-    AppComponent,HeaderComponent,TablesComponent,ColumnsComponent,CSharpComponent, TypeScriptComponent
+    AppComponent,HeaderComponent,TablesComponent,ColumnsComponent,CSharpComponent, TypeScriptComponent, BaseComponent
   ],
   
   imports: [
@@ -22,6 +24,7 @@ import { SchemaService } from './app.schema.service';
     MaterialModule,
     HttpModule,
     FormsModule,
+    StorageServiceModule,
     BrowserAnimationsModule
   ],
   providers: [SchemaService],

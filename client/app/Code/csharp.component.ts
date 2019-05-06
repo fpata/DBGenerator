@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatTabChangeEvent,  MatRadioButton, MatRadioGroup, MatRadioChange } from '@angular/material';
+import { MatTabChangeEvent, MatRadioButton, MatRadioGroup, MatRadioChange } from '@angular/material';
 
 import { BaseComponent } from '../Base/base.component';
 
@@ -30,7 +30,7 @@ export class CSharpComponent extends BaseComponent {
   GetCSharpCode(orm: string, codeIndex: number): void {
 
     var codeType: string = '';
-    var code:string = '';
+    var code: string = '';
     switch (codeIndex) {
       case 0:
         codeType = 'CSharpEntity';
@@ -47,7 +47,7 @@ export class CSharpComponent extends BaseComponent {
     }
     this.appService.getCode(this.connectStr, this.DBType, this.selectedTable, codeType, orm).subscribe(
       data => {
-        code= data._body;
+        code = data._body;
         switch (codeIndex) {
           case 0:
             this.codeCSharpEntity = code;
@@ -60,6 +60,10 @@ export class CSharpComponent extends BaseComponent {
             break;
         }
       });
-     
+
+  }
+
+  createFiles(fileType:String): void {
+
   }
 }
