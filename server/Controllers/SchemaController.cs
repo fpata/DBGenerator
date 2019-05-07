@@ -43,9 +43,14 @@ namespace DBGen
             ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType);
             if (codeType.Equals("CSharpDBContext", StringComparison.InvariantCultureIgnoreCase))
             {
-                var DALCodeHelper = (CSharpDALCodeHelper)codeHelper;
+                var DALDBContextCodeHelper = (CSharpDALCodeHelper)codeHelper;
                 DataTable dtTables = dbhelper.GetTables();
-                code = DALCodeHelper.GetDBContextCode(dtTables);
+                code = DALDBContextCodeHelper.GetDBContextCode(dtTables);
+            }
+            else if(codeType.Equals("CSharpDAL"))
+            {
+                var DALCodeHelper = (CSharpDALCodeHelper)codeHelper;
+                code = DALCodeHelper.GetDALCode(tableName);
             }
             else
             {
