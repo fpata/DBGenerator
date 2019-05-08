@@ -41,22 +41,13 @@ namespace DBGen
             SetObjectData(objectData);
             IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
             ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType);
+            DataTable dtTables = null;
+            DataTable dtColumns = null;
             if (codeType.Equals("CSharpDBContext", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var DALDBContextCodeHelper = (CSharpDALCodeHelper)codeHelper;
-                DataTable dtTables = dbhelper.GetTables();
-                code = DALDBContextCodeHelper.GetDBContextCode(dtTables);
-            }
-            else if(codeType.Equals("CSharpDAL"))
-            {
-                var DALCodeHelper = (CSharpDALCodeHelper)codeHelper;
-                code = DALCodeHelper.GetDALCode(tableName);
-            }
-            else
-            {
-                DataTable dtColumns = dbhelper.GetColumns(tableName);
-                code = codeHelper.GetCode(tableName, dtColumns, orm);
-            }
+                  dtTables = dbhelper.GetTables();
+            if (codeType.Equals("CSharpEntity", StringComparison.InvariantCultureIgnoreCase))
+                 dtColumns = dbhelper.GetColumns(tableName);
+             code = codeHelper.GetCode(String.Empty,orm,dtTables, dtColumns);
             return code;
         }
 
@@ -70,11 +61,12 @@ namespace DBGen
             DataTable dtTables = dbhelper.GetTables();
             FileHelper fileHelper = new FileHelper();
             String tableName = String.Empty;
+            DataTable dtColumns = null;
             foreach (DataRow dr in dtTables.Rows)
             {
                 tableName = dr["Name"].ToString();
-                DataTable dtColumns = dbhelper.GetColumns(tableName);
-                String code = codeHelper.GetCode(tableName, dtColumns, orm);
+                dtColumns = dbhelper.GetColumns(tableName);
+                String code = codeHelper.GetCode(tableName,orm, dtTables, dtColumns);
                 fileHelper.WriteFile(tableName + fileExtn, code);
             }
             return "Process Complete";

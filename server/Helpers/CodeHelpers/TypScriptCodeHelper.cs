@@ -7,7 +7,7 @@ namespace DBGen
 {
     public class TypScriptCodeHelper : ICodeHelper
     {
-        public string GetCode(string tableName, DataTable dtColumns, ORM ORMType)
+        public string GetCode(string tableName, ORM ORMType ,DataTable dtTables, DataTable dtColumns)
         {
 
             StringBuilder sb = new StringBuilder();

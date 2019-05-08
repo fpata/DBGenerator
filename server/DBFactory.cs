@@ -27,11 +27,13 @@ namespace DBGen
             switch (code)
             {
                 case "CSharpEntity":
-                    codeHelper = new CSharpEntityCodeHelper();
+                    codeHelper = new EntityCodeHelper();
                     break;
                 case "CSharpDAL":
+                    codeHelper = new DALCodeHelper();
+                    break;
                 case "CSharpDBContext":
-                    codeHelper = new CSharpDALCodeHelper();
+                    codeHelper = new DBContextHelper();
                     break;
                 case "TypeScript":
                     codeHelper = new TypScriptCodeHelper();
