@@ -24,6 +24,11 @@ export class ColumnsComponent extends BaseComponent {
     this.tableColumns.paginator = this.columnPaginator;
   }
 
+  ngAfterViewInit()
+  {
+    this.GetData();
+  }
+
   public GetData(): void {
     this.connectStr = sessionStorage.getItem('ConnectStr');
     this.DBType = sessionStorage.getItem('DBType');

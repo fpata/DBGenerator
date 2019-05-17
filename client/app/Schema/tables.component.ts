@@ -23,7 +23,10 @@ export class TablesComponent extends BaseComponent {
   ngOnInit() {
     this.tables.paginator = this.tablePaginator;
   }
-
+  ngAfterViewInit()
+  {
+    this.GetData();
+  }
   public GetData()
   {
     this.connectStr = sessionStorage.getItem('ConnectStr');

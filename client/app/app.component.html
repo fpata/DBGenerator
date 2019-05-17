@@ -3,27 +3,17 @@
 </mat-toolbar>
 <mat-card>
   <mat-card-content>
+    
     <app-header></app-header>
     <mat-divider></mat-divider>
     <br>
-
-    <mat-tab-group (selectedTabChange)="tabChanged($event)">
-        <mat-tab label="Tables">
-            <br />
-      <app-tables #appTables></app-tables>
-      </mat-tab>
-      <mat-tab label="Columns">
-          <br />
-      <app-columns #appColumns></app-columns>
-      </mat-tab>
-      <mat-tab label="CSharp Code">
-          <br />
-      <app-csharp #appCSharp></app-csharp>
-      </mat-tab>
-      <mat-tab label="TypeScript Code">
-          <br />
-      <app-typescript #appTypeScript></app-typescript>
-      </mat-tab>
-    </mat-tab-group>
+    <table class="width100"><tr><td class="borderTd" style="width:20%;vertical-align: top">
+    <app-navigation></app-navigation>
+    </td>
+    <td class="width80 borderTd" style="vertical-align: top">
+  <router-outlet></router-outlet>
+    </td>
+    </tr></table>
+    
   </mat-card-content>
 </mat-card>

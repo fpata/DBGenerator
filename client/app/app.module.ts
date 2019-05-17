@@ -13,10 +13,13 @@ import {TypeScriptComponent} from './Code/typescript.component';
 import { SchemaService } from './app.schema.service';
 import { StorageServiceModule} from 'angular-webstorage-service';
 import { BaseComponent } from './Base/base.component';
+import { NavigationMenu } from './NavigationSideMenu/navigationMenu.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,HeaderComponent,TablesComponent,ColumnsComponent,CSharpComponent, TypeScriptComponent, BaseComponent
+    , NavigationMenu
   ],
   
   imports: [
@@ -25,7 +28,8 @@ import { BaseComponent } from './Base/base.component';
     HttpModule,
     FormsModule,
     StorageServiceModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   providers: [SchemaService],
   bootstrap: [AppComponent]
