@@ -8,7 +8,8 @@ import { AppComponent } from './app.component';
 import {HeaderComponent} from './Header/header.component';
 import {TablesComponent} from './Schema/tables.component';
 import {ColumnsComponent} from './Schema/columns.component';
-import {CSharpComponent} from './Code/csharp.component';
+import {PocoComponent, CSharpComponent,DALComponent,DapperComponent
+,EF_DBContextComponent,EFFluentMapComponent, EFDataAnnotationComponent } from './Code/CSharp/index';
 import {TypeScriptComponent} from './Code/typescript.component';
 import { SchemaService } from './app.schema.service';
 import { StorageServiceModule} from 'angular-webstorage-service';
@@ -18,8 +19,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent,HeaderComponent,TablesComponent,ColumnsComponent,CSharpComponent, TypeScriptComponent, BaseComponent
-    , NavigationMenu
+    AppComponent,HeaderComponent,TablesComponent,ColumnsComponent, TypeScriptComponent, BaseComponent
+    , NavigationMenu,PocoComponent, CSharpComponent,DALComponent,DapperComponent
+    ,EF_DBContextComponent,EFFluentMapComponent, EFDataAnnotationComponent 
   ],
   
   imports: [

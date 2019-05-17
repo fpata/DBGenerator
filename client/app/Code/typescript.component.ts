@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , AfterViewInit } from '@angular/core';
 import { BaseComponent } from '../Base/base.component';
 
 @Component({
@@ -11,6 +11,9 @@ export class TypeScriptComponent extends BaseComponent {
   codeTypeScript: string = '';
   ORM: string = 'None';
   
+  ngAfterViewInit() {
+    this.GetData();
+  }
   public GetData(): void {
     this.connectStr = sessionStorage.getItem('ConnectStr');
     this.DBType = sessionStorage.getItem('DBType');

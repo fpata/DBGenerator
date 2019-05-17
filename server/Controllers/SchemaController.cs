@@ -40,14 +40,15 @@ namespace DBGen
             String code = String.Empty;
             SetObjectData(objectData);
             IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
-            ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType);
+            ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType,orm);
             DataTable dtTables = null;
             DataTable dtColumns = null;
             if (codeType.Equals("CSharpDBContext", StringComparison.InvariantCultureIgnoreCase))
                   dtTables = dbhelper.GetTables();
-            if (codeType.Equals("CSharpEntity", StringComparison.InvariantCultureIgnoreCase))
+            if (codeType.Equals("CSharpEntity", StringComparison.InvariantCultureIgnoreCase)
+            ||  codeType.Equals("TypeScript", StringComparison.InvariantCultureIgnoreCase))
                  dtColumns = dbhelper.GetColumns(tableName);
-             code = codeHelper.GetCode(String.Empty,orm,dtTables, dtColumns);
+             code = codeHelper.GetCode(tableName,orm,dtTables, dtColumns);
             return code;
         }
 
@@ -57,7 +58,7 @@ namespace DBGen
             SetObjectData(objectData);
             string fileExtn = codeType.StartsWith('C') ? ".cs" : ".ts";
             IDBHelper dbhelper = DBFactory.GetDBInstance(connectStr, DBType.Sqlite);
-            ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType);
+            ICodeHelper codeHelper = DBFactory.GetCodeHelper(codeType, orm);
             DataTable dtTables = dbhelper.GetTables();
             FileHelper fileHelper = new FileHelper();
             String tableName = String.Empty;

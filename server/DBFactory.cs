@@ -21,13 +21,16 @@ namespace DBGen
         }
 
 
-        public static ICodeHelper GetCodeHelper(string code)
+        public static ICodeHelper GetCodeHelper(string code, ORM orm)
         {
             ICodeHelper codeHelper = null;
             switch (code)
             {
                 case "CSharpEntity":
-                    codeHelper = new EntityCodeHelper();
+                    if (orm == ORM.EFFluentMap)
+                        codeHelper = new EFMappingCodeHelper();
+                    else
+                        codeHelper = new EntityCodeHelper();
                     break;
                 case "CSharpDAL":
                     codeHelper = new DALCodeHelper();

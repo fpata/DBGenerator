@@ -42,10 +42,12 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
         {name:'Entity-POCO'},
         {name:'Entity-EntityFramework-DataAnnotations'},
         {name:'Entity-EntityFramework-FluentMapping'},
-        {name:'Entity-Dapper'}
+        {name:'Entity-Dapper'},
+        {name:'EntityFramework-DBContext'},
+        {name:'EntityFramework-DAL'}
       ]
     },
-      {name:'Typescript'}
+      {name:'TypeScript'}
     ]
   }
 ];

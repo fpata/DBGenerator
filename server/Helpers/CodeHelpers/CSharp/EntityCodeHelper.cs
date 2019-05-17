@@ -93,6 +93,7 @@ namespace DBGen
     {
         None,
         EntityFramework,
-        Dapper
+        Dapper,
+        EFFluentMap
     }
 }
