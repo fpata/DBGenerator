@@ -16,12 +16,13 @@ import { StorageServiceModule} from 'angular-webstorage-service';
 import { BaseComponent } from './Base/base.component';
 import { NavigationMenu } from './NavigationSideMenu/navigationMenu.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { PlainHtmlComponent,BooStrapHtmlComponent, HTMLComponent, MaterialHtmlComponent } from './Html/index';
 @NgModule({
   declarations: [
     AppComponent,HeaderComponent,TablesComponent,ColumnsComponent, TypeScriptComponent, BaseComponent
     , NavigationMenu,PocoComponent, CSharpComponent,DALComponent,DapperComponent
-    ,EF_DBContextComponent,EFFluentMapComponent, EFDataAnnotationComponent 
+    ,EF_DBContextComponent,EFFluentMapComponent, EFDataAnnotationComponent ,
+    PlainHtmlComponent,BooStrapHtmlComponent, HTMLComponent, MaterialHtmlComponent
   ],
   
   imports: [

@@ -41,6 +41,20 @@ namespace DBGen
                 case "TypeScript":
                     codeHelper = new TypScriptCodeHelper();
                     break;
+                case "HTML":
+                    switch (orm)
+                    {
+                        case ORM.None:
+                            codeHelper = new PlainHtmlCodeHelper();
+                            break;
+                        case ORM.BootStrap:
+                            codeHelper = new BootStrapHtmlCodeHelper();
+                            break;
+                        case ORM.Material:
+                            codeHelper = new MaterialHtmlCodeHelper();
+                            break;
+                    }
+                    break;
             }
             return codeHelper;
 

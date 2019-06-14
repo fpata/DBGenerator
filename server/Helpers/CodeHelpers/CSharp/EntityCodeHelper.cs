@@ -94,6 +94,10 @@ namespace DBGen
         None,
         EntityFramework,
         Dapper,
-        EFFluentMap
+        EFFluentMap,
+
+        BootStrap,
+
+        Material
     }
 }

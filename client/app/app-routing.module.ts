@@ -9,6 +9,7 @@ import { EFFluentMapComponent } from './Code/CSharp/efFluentMap.component';
 import { EF_DBContextComponent } from './Code/CSharp/efDBContext.component';
 import { DALComponent } from './Code/CSharp/dal.component';
 import { DapperComponent } from './Code/CSharp';
+import { PlainHtmlComponent,BooStrapHtmlComponent, HTMLComponent, MaterialHtmlComponent } from './Html';
 
 
 const routes: Routes = [
@@ -20,7 +21,10 @@ const routes: Routes = [
     { path: 'Entity-EntityFramework-FluentMapping', component: EFFluentMapComponent },
     { path: 'EntityFramework-DBContext', component: EF_DBContextComponent },
     { path: 'EntityFramework-DAL', component: DALComponent },
-    { path: 'TypeScript', component: TypeScriptComponent }
+    { path: 'TypeScript', component: TypeScriptComponent },
+    { path: 'PlainHtml', component: PlainHtmlComponent},
+    { path: 'BootStrap', component: BooStrapHtmlComponent},
+    { path: 'Material', component: MaterialHtmlComponent}
   ];
 
 @NgModule({
